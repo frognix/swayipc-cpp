@@ -1,4 +1,2 @@
-cmake-build-debug
-cmake-build-release
+build
 compile_commands.json
-src/main.cpp
