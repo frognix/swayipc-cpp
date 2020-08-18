@@ -1,5 +1,7 @@
 #include "socket_wrapper.hpp"
 
+namespace swayipc {
+
 socket_wrapper::socket_wrapper(int domain, int type, int protocol) {
     descriptor = socket(domain, type, protocol);
 }
@@ -61,4 +63,6 @@ std::optional<size_t> socket_wrapper::send(const char* buf, size_t len, int flag
         return {};
     else
         return res;
+}
+
 }

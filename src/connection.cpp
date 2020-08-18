@@ -1,6 +1,10 @@
 #include "connection.hpp"
 #include "sway_socket.hpp"
 
+using namespace swayipc::data;
+
+namespace swayipc {
+
 connection::connection(sway_socket* socket)
     : m_socket(socket) {}
 
@@ -94,4 +98,6 @@ std::vector<input_s> connection::get_inputs() {
 std::vector<seat_s> connection::get_seats() {
     auto message = raw_request(GET_SEATS);
     return json::parse(message.payload).get<std::vector<seat_s>>();
+}
+
 }

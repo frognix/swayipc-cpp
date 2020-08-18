@@ -1,5 +1,7 @@
 #pragma once
 
+namespace swayipc {
+
 enum message_type : uint32_t {
     RUN_COMMAND = 0,
     GET_WORKSPACES = 1,
@@ -46,23 +48,23 @@ struct always_false {
 
 template <class T>
 constexpr message_type get_event_tag() {
-    if constexpr (std::is_same_v<T, workspace_ev_s>) {
+    if constexpr (std::is_same_v<T, data::workspace_ev_s>) {
         return WORKSPACE_EVENT;
-    } else if constexpr (std::is_same_v<T, mode_ev_s>) {
+    } else if constexpr (std::is_same_v<T, data::mode_ev_s>) {
         return MODE_EVENT;
-    } else if constexpr (std::is_same_v<T, window_ev_s>) {
+    } else if constexpr (std::is_same_v<T, data::window_ev_s>) {
         return WINDOW_EVENT;
-    } else if constexpr (std::is_same_v<T, bar_config_update_ev_s>) {
+    } else if constexpr (std::is_same_v<T, data::bar_config_update_ev_s>) {
         return BAR_CONFIG_UPDATE_EVENT;
-    } else if constexpr (std::is_same_v<T, binding_ev_s>) {
+    } else if constexpr (std::is_same_v<T, data::binding_ev_s>) {
         return BINDING_EVENT;
-    } else if constexpr (std::is_same_v<T, shutdown_ev_s>) {
+    } else if constexpr (std::is_same_v<T, data::shutdown_ev_s>) {
         return SHUTDOWN_EVENT;
-    } else if constexpr (std::is_same_v<T, tick_ev_s>) {
+    } else if constexpr (std::is_same_v<T, data::tick_ev_s>) {
         return TICK_EVENT;
-    } else if constexpr (std::is_same_v<T, bar_state_update_ev_s>) {
+    } else if constexpr (std::is_same_v<T, data::bar_state_update_ev_s>) {
         return BAR_STATE_UPDATE_EVENT;
-    } else if constexpr (std::is_same_v<T, input_ev_s>) {
+    } else if constexpr (std::is_same_v<T, data::input_ev_s>) {
         return INPUT_EVENT;
     } else {
         static_assert(always_false<T>::value, "Bad event type");
@@ -80,4 +82,6 @@ inline bool is_event(const message_s& msg) {
         type == message_type::TICK_EVENT ||
         type == message_type::BAR_STATE_UPDATE_EVENT ||
         type == message_type::INPUT_EVENT;
+}
+
 }

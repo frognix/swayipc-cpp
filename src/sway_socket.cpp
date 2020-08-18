@@ -1,5 +1,9 @@
 #include "sway_socket.hpp"
 
+// using namespace swayipc::data;
+
+namespace swayipc {
+
 sway_socket::sway_socket()
     : m_socket_path(std::getenv("SWAYSOCK")), m_socket(AF_UNIX, SOCK_STREAM, 0) {}
 
@@ -25,8 +29,6 @@ bool sway_socket::connect() {
 void sway_socket::close() {
     m_socket.close();
 }
-
-#include <iostream>
 
 void sway_socket::handle_events() {
     message_s message;
@@ -102,4 +104,6 @@ void sway_socket::write(message_type type, std::string payload) {
         res = m_socket.send(message.payload.data(), message.header.length);
         if (!res) throw std::runtime_error("send error");
     }
+}
+
 }

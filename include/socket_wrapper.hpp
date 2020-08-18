@@ -6,6 +6,8 @@
 #include <string.h>
 #include <optional>
 
+namespace swayipc {
+
 class socket_wrapper {
 public:
     socket_wrapper() : descriptor(0) {}
@@ -28,3 +30,5 @@ private:
     socket_wrapper(int desc) : descriptor(desc) {}
     int descriptor;
 };
+
+}

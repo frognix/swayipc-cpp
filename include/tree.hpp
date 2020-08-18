@@ -1,11 +1,17 @@
+#pragma once
+
 #include "serialization.hpp"
+
+namespace swayipc {
 
 class tree {
 public:
-    tree(node_s node);
+    tree(data::node_s node);
 
-    node_s* find_focused();
+    data::node_s* find_focused();
 private:
-    static node_s* find(node_s&, std::function<bool(const node_s&)>);
-    node_s m_node;
+    static data::node_s* find(data::node_s&, std::function<bool(const data::node_s&)>);
+    data::node_s m_node;
 };
+
+}

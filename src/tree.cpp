@@ -1,5 +1,9 @@
 #include "tree.hpp"
 
+using namespace swayipc::data;
+
+namespace swayipc {
+
 tree::tree(node_s node)
     : m_node(std::move(node)) {}
 
@@ -16,4 +20,6 @@ node_s* tree::find(node_s& node, std::function<bool(const node_s&)> pred) {
         }
         return nullptr;
     }
+}
+
 }

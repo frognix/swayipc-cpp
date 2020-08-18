@@ -7,6 +7,8 @@
 #include "connection.hpp"
 #include "event_stream.hpp"
 
+namespace swayipc {
+
 class sway_socket {
 public:
     sway_socket();
@@ -41,4 +43,6 @@ void sway_socket::set_event_handler(std::function<void(connection conn, event_st
     m_queues[get_event_tag<T>()] = safe_queue<message_s>{};
     std::thread thr(func, connection{this}, event_stream<T>(&m_queues[get_event_tag<T>()]));
     thr.detach();
+}
+
 }

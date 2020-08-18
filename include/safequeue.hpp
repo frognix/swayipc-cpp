@@ -4,6 +4,8 @@
 #include <mutex>
 #include <condition_variable>
 
+namespace swayipc {
+
 template <class T>
 class safe_queue {
 public:
@@ -59,4 +61,6 @@ T safe_queue<T>::pop() {
 template <class T>
 bool safe_queue<T>::unsafe_empty() const {
     return m_queue.empty();
+}
+
 }
