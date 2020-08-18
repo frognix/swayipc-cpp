@@ -1,7 +1,5 @@
 #include "socket_wrapper.hpp"
 
-#include <fstream>
-
 socket_wrapper::socket_wrapper(int domain, int type, int protocol) {
     descriptor = socket(domain, type, protocol);
 }

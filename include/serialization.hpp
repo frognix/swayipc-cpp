@@ -1,6 +1,7 @@
 #pragma once
 
 #include <nlohmann/json.hpp>
+
 using json = nlohmann::json;
 
 template <class T>
@@ -8,7 +9,8 @@ inline void get_or(const json& j, const char* name, T& val) {
     if (j.contains(name) && !j[name].is_null()) val = j[name].get<T>();
 }
 
-inline void set_or(json& j, const char* name, const auto& val) {
+template <class T>
+inline void set_or(json& j, const char* name, const T& val) {
     auto jval = json(val);
     if (!jval.is_null()) {
         j[name] = jval;
