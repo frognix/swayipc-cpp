@@ -47,6 +47,10 @@ void sway_socket::handle_events() {
     }
 }
 
+connection sway_socket::get_client() {
+    return connection(this);
+}
+
 message_s sway_socket::request(message_type type, std::string payload) {
     write(type, payload);
     return read(type);

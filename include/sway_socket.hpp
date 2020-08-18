@@ -19,8 +19,11 @@ public:
     void close();
 
     void handle_events();
+
     template <class T>
-    void set_event_handler(std::function<void(connection conn, event_stream<T> stream)>);
+    event_stream<T> get_event_stream();
+
+    connection get_client();
 
     message_s request(message_type type, std::string payload = "");
 
@@ -39,10 +42,8 @@ private:
 };
 
 template <class T>
-void sway_socket::set_event_handler(std::function<void(connection conn, event_stream<T> stream)> func) {
-    m_queues[get_event_tag<T>()] = safe_queue<message_s>{};
-    std::thread thr(func, connection{this}, event_stream<T>(&m_queues[get_event_tag<T>()]));
-    thr.detach();
+event_stream<T> sway_socket::get_event_stream() {
+    return event_stream<T>(&m_queues[get_event_tag<T>()]);
 }
 
 }
