@@ -14,9 +14,24 @@ message_s connection::raw_request(message_type type, std::string payload) {
     return m_socket->request(type, payload);
 }
 
-std::vector<command_success_s> connection::run_command(std::string command) {
+std::vector<command_success_s> connection::command(std::string command) {
     auto message = raw_request(RUN_COMMAND, command);
     return json::parse(message.payload).get<std::vector<command_success_s>>();
+}
+
+std::vector<data::command_success_s> connection::command_on(data::container* cont, std::string command) {
+    auto message = raw_request(RUN_COMMAND, "[con_id=" + std::to_string(cont->id) + "] " + command);
+    return json::parse(message.payload).get<std::vector<command_success_s>>();
+}
+
+std::vector<data::command_success_s> connection::command_on(const std::vector<data::container*>& conts, std::string command) {
+    std::vector<data::command_success_s> res;
+    for (auto cont : conts) {
+        auto message = raw_request(RUN_COMMAND, "[con_id=" + std::to_string(cont->id) + "] " + command);
+        auto vec = json::parse(message.payload).get<std::vector<command_success_s>>();
+        res.insert(res.end(), vec.begin(), vec.end());
+    }
+    return res;
 }
 
 std::vector<workspace_s> connection::get_workspaces() {
@@ -45,9 +60,9 @@ std::vector<output_s> connection::get_outputs() {
     return json::parse(message.payload).get<std::vector<output_s>>();
 }
 
-node_s connection::get_tree() {
+container connection::get_tree() {
     auto message = raw_request(GET_TREE);
-    return json::parse(message.payload).get<node_s>();
+    return json::parse(message.payload).get<container>();
 }
 
 std::vector<std::string> connection::get_marks() {

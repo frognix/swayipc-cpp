@@ -32,19 +32,18 @@ void sway_socket::close() {
 
 void sway_socket::handle_events() {
     message_s message;
-    if (m_event_queue.empty()) {
-        std::unique_lock lock{m_read_mutex};
-        message.header = peek_header();
-        if (!is_event(message)) return;
-        message = read(ANY);
-    } else {
-        message = std::move(m_event_queue.front());
-        m_event_queue.pop();
-    }
 
-    if (is_event(message)) {
-        m_queues[message.header.type].push(message);
-    }
+    std::unique_lock lock{m_read_mutex};
+    message.header = peek_header();
+    if (!is_event(message)) return;
+    message = read(ANY);
+
+    send_to_event_queue(std::move(message));
+}
+
+void sway_socket::send_to_event_queue(message_s&& msg) {
+    Expects(is_event(msg));
+    m_queues[msg.header.type].push(msg);
 }
 
 connection sway_socket::get_client() {
@@ -73,7 +72,7 @@ message_s sway_socket::read(message_type type) {
 
         read_num++;
         if (message.header.type != type && type != ANY)
-            m_event_queue.push(message);
+            send_to_event_queue(std::move(message));
         else break;
     }
 

@@ -31,12 +31,12 @@ private:
     message_s read(message_type type);
     message_header peek_header();
     void write(message_type type, std::string payload = "");
+    void send_to_event_queue(message_s&& msg);
 
     std::mutex m_write_mutex;
     std::recursive_mutex m_read_mutex;
     std::string m_socket_path;
     socket_wrapper m_socket;
-    std::queue<message_s> m_event_queue;
 
     std::map<message_type, safe_queue<message_s>> m_queues;
 };
