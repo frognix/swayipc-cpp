@@ -27,7 +27,7 @@ enum message_type : uint32_t {
     TICK_EVENT = 0x80000007,
     BAR_STATE_UPDATE_EVENT = 0x80000014,
     INPUT_EVENT = 0x80000015,
-    ANY = 0xFFFFFFFF
+    // ANY = 0xFFFFFFFF
 };
 
 struct __attribute__ ((packed)) message_header {

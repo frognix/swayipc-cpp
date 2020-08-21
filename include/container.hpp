@@ -13,7 +13,7 @@ enum class node_type_t {
     CON,
     FLOATING_CON
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(node_type_t, {
+DEFINE_ENUM(node_type_t, {
         {node_type_t::ROOT,         "root"},
         {node_type_t::OUTPUT,       "output"},
         {node_type_t::WORKSPACE,    "workspace"},
@@ -27,7 +27,7 @@ enum class border_t {
     PIXEL,
     CSD
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(border_t, {
+DEFINE_ENUM(border_t, {
         {border_t::NORMAL, "normal"},
         {border_t::NONE,   "none"},
         {border_t::PIXEL,  "pixel"},
@@ -41,7 +41,7 @@ enum class layout_t {
     TABBED,
     OUTPUT
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(layout_t, {
+DEFINE_ENUM(layout_t, {
         {layout_t::SPLITH, "splith"},
         {layout_t::SPLITV, "splitv"},
         {layout_t::STACKED, "stacked"},
@@ -54,7 +54,7 @@ enum class orientation_t {
     HORIZONTAL,
     NONE
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(orientation_t, {
+DEFINE_ENUM(orientation_t, {
         {orientation_t::VERTICAL,   "vertical"},
         {orientation_t::HORIZONTAL, "horizontal"},
         {orientation_t::NONE,       "none"},
@@ -70,7 +70,7 @@ enum class application_idle_t {
     ENABLED,
     NONE
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(application_idle_t, {
+DEFINE_ENUM(application_idle_t, {
         {application_idle_t::ENABLED, "enabled"},
         {application_idle_t::NONE,    "none"},
 })
@@ -82,7 +82,7 @@ enum class user_idle_t {
     VISIBLE,
     NONE
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(user_idle_t, {
+DEFINE_ENUM(user_idle_t, {
         {user_idle_t::FOCUS,      "focus"},
         {user_idle_t::FULLSCREEN, "fullscreen"},
         {user_idle_t::OPEN,       "open"},
@@ -94,7 +94,7 @@ struct idle_inhibitors_s {
     application_idle_t application;
     user_idle_t user;
 };
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(idle_inhibitors_s, application, user);
+DEFINE_STRICT_TYPE(idle_inhibitors_s, application, user)
 
 struct window_properties_s {
     std::string title;
@@ -160,6 +160,6 @@ DEFINE_TYPE_DEFAULT(container, id, name, type, border, current_border_width,
                     deco_rect, geometry, urgent, sticky, marks,
                     focused, focus, nodes, floating_nodes, representation,
                     fullscreen_mode, app_id, pid, visible, shell,
-                    inhibit_idle, idle_inhibitors, window, window_properties);
+                    inhibit_idle, idle_inhibitors, window, window_properties)
 
 }

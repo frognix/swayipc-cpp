@@ -50,12 +50,14 @@ using opt = std::optional<T>;
 
 #define DEFINE_STRICT_TYPE(Type, ...) DEFINE_TYPE(Type, NLOHMANN_JSON_TO, NLOHMANN_JSON_FROM, __VA_ARGS__)
 
+#define DEFINE_ENUM(Type, ...) NLOHMANN_JSON_SERIALIZE_ENUM(Type, __VA_ARGS__)
+
 struct rect_s {
     int x;
     int y;
     int width;
     int height;
 };
-DEFINE_STRICT_TYPE(rect_s, x, y, width, height);
+DEFINE_STRICT_TYPE(rect_s, x, y, width, height)
 
 }

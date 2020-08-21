@@ -30,13 +30,15 @@ void sway_socket::close() {
     m_socket.close();
 }
 
+#define ANY 0xFFFFFFFF
+
 void sway_socket::handle_events() {
     message_s message;
 
     std::unique_lock lock{m_read_mutex};
     message.header = peek_header();
     if (!is_event(message)) return;
-    message = read(ANY);
+    message = read(message_type(ANY));
 
     send_to_event_queue(std::move(message));
 }

@@ -10,7 +10,7 @@ struct command_success_s {
     bool success;
     opt<std::string> error;
 };
-DEFINE_TYPE_DEFAULT(command_success_s, success, error);
+DEFINE_TYPE_DEFAULT(command_success_s, success, error)
 
 struct workspace_s {
     int num;
@@ -21,7 +21,7 @@ struct workspace_s {
     rect_s rect;
     std::string output;
 };
-DEFINE_TYPE_DEFAULT(workspace_s, num, name, visible, focused, urgent, rect, output);
+DEFINE_TYPE_DEFAULT(workspace_s, num, name, visible, focused, urgent, rect, output)
 
 enum class subpixel_hinting_t {
     RGB,
@@ -30,7 +30,7 @@ enum class subpixel_hinting_t {
     VBGR,
     NONE,
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(subpixel_hinting_t, {
+DEFINE_ENUM(subpixel_hinting_t, {
         {subpixel_hinting_t::RGB,  "rgb"},
         {subpixel_hinting_t::BGR,  "bgr"},
         {subpixel_hinting_t::VRGB, "vrgb"},
@@ -47,7 +47,7 @@ enum class transform_t {
     FLIPPED_180,
     FLIPPED_270
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(transform_t, {
+DEFINE_ENUM(transform_t, {
         {transform_t::NORMAL,      "normal"},
         {transform_t::_90,         "normal"},
         {transform_t::_180,        "normal"},
@@ -62,7 +62,7 @@ struct mode_s {
     int height;
     int refresh;
 };
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(mode_s, width, height, refresh);
+DEFINE_STRICT_TYPE(mode_s, width, height, refresh)
 
 struct output_s {
     opt<std::string> name;
@@ -81,14 +81,14 @@ struct output_s {
     opt<rect_s> rect;
 };
 DEFINE_TYPE_DEFAULT(output_s, name, make, model, serial, active, dpms, primary, scale, subpixel_hinting,
-                    transform, current_workspace, modes, current_mode, rect);
+                    transform, current_workspace, modes, current_mode, rect)
 
 enum class bar_mode_t {
     DOCK,
     HIDE,
     INVISIBLE
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(bar_mode_t, {
+DEFINE_ENUM(bar_mode_t, {
         {bar_mode_t::DOCK, "dock"},
         {bar_mode_t::HIDE, "hide"},
         {bar_mode_t::INVISIBLE, "invisible"},
@@ -98,7 +98,7 @@ enum class bar_position_t {
     BOTTOM,
     TOP
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(bar_position_t, {
+DEFINE_ENUM(bar_position_t, {
         {bar_position_t::BOTTOM, "bottom"},
         {bar_position_t::TOP,    "top"},
 })
@@ -109,7 +109,7 @@ struct bar_gaps_t {
     int bottom;
     int left;
 };
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(bar_gaps_t, top, right, bottom, left);
+DEFINE_STRICT_TYPE(bar_gaps_t, top, right, bottom, left)
 
 using color_t = std::string;
 
@@ -136,7 +136,7 @@ struct bar_colors_s {
     color_t binding_mode_bg;
     color_t binding_mode_border;
 };
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(bar_colors_s, background, statusline,
+DEFINE_STRICT_TYPE(bar_colors_s, background, statusline,
                                    separator, focused_background,
                                    focused_statusline, focused_separator,
                                    focused_workspace_text, focused_workspace_bg,
@@ -146,7 +146,7 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(bar_colors_s, background, statusline,
                                    inactive_workspace_border, urgent_workspace_text,
                                    urgent_workspace_bg, urgent_workspace_border,
                                    binding_mode_text, binding_mode_bg,
-                                   binding_mode_border);
+                                   binding_mode_border)
 
 struct bar_config_s {
     std::string id;
@@ -166,7 +166,7 @@ struct bar_config_s {
 DEFINE_TYPE_DEFAULT(bar_config_s, id, mode, position, status_command,
                     font, workspace_buttons, binding_mode_indicator,
                     verbose, colors, gaps, bar_height, status_padding,
-                    status_edge_padding);
+                    status_edge_padding)
 
 struct version_s {
     int major;
@@ -175,7 +175,7 @@ struct version_s {
     std::string human_readable;
     std::string loaded_config_file_name;
 };
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(version_s, major, minor, patch, human_readable, loaded_config_file_name);
+DEFINE_STRICT_TYPE(version_s, major, minor, patch, human_readable, loaded_config_file_name)
 
 enum class input_type_t {
     KEYBOARD,
@@ -185,7 +185,7 @@ enum class input_type_t {
     TABLET_PAD,
     SWITCH
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(input_type_t, {
+DEFINE_ENUM(input_type_t, {
         {input_type_t::KEYBOARD, "keyboard"},
         {input_type_t::POINTER, "pointer"},
         {input_type_t::TOUCH, "touch"},
@@ -199,7 +199,7 @@ enum class send_events_t {
     ENABLED,
     DISABLED_ON_EXTERNAL_MOUSE
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(send_events_t, {
+DEFINE_ENUM(send_events_t, {
         {send_events_t::ENABLED, "enabled"},
         {send_events_t::DISABLED, "disabled"},
         {send_events_t::DISABLED_ON_EXTERNAL_MOUSE, "disabled_on_external_mouse"},
@@ -209,7 +209,7 @@ enum class state_t {
     DISABLED,
     ENABLED
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(state_t, {
+DEFINE_ENUM(state_t, {
         {state_t::ENABLED, "enabled"},
         {state_t::DISABLED, "disabled"},
 })
@@ -218,7 +218,7 @@ enum class tab_button_map_t {
     LMR,
     LRM
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(tab_button_map_t, {
+DEFINE_ENUM(tab_button_map_t, {
         {tab_button_map_t::LMR, "lmr"},
         {tab_button_map_t::LRM, "lrm"},
 })
@@ -228,7 +228,7 @@ enum class accel_profile_t {
     FLAT,
     ADAPTIVE
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(accel_profile_t, {
+DEFINE_ENUM(accel_profile_t, {
         {accel_profile_t::NONE, "none"},
         {accel_profile_t::FLAT, "flat"},
         {accel_profile_t::ADAPTIVE, "adaptive"},
@@ -239,7 +239,7 @@ enum class click_method_t {
     BUTTON_AREAS,
     CLICKFINGER
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(click_method_t, {
+DEFINE_ENUM(click_method_t, {
         {click_method_t::NONE, "none"},
         {click_method_t::BUTTON_AREAS, "button_areas"},
         {click_method_t::CLICKFINGER, "clickfinger"},
@@ -251,7 +251,7 @@ enum class scroll_method_t {
     EDGE,
     ON_BUTTON_DOWN
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(scroll_method_t, {
+DEFINE_ENUM(scroll_method_t, {
         {scroll_method_t::NONE, "none"},
         {scroll_method_t::TWO_FINGER, "two_finger"},
         {scroll_method_t::EDGE, "edge"},
@@ -279,7 +279,7 @@ DEFINE_TYPE_DEFAULT(libinput_s, send_events, tap, tap_button_map,
                     tap_drag, tap_drag_lock, accel_speed, accel_profile,
                     natural_scroll, left_handed, click_method,
                     middle_emulation, scroll_method, scroll_button,
-                    dwt, calibration_matrix);
+                    dwt, calibration_matrix)
 
 struct input_s {
     std::string identifier;
@@ -294,7 +294,7 @@ struct input_s {
 };
 DEFINE_TYPE_DEFAULT(input_s, identifier, name, vendor, product, type,
                     xkb_active_layout_name, xkb_layout_names,
-                    xkb_active_layout_index, libinput);
+                    xkb_active_layout_index, libinput)
 
 struct seat_s {
     std::string name;
@@ -302,7 +302,7 @@ struct seat_s {
     int focus;
     std::vector<input_s> devices;
 };
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(seat_s, name, capabilities, focus, devices);
+DEFINE_STRICT_TYPE(seat_s, name, capabilities, focus, devices)
 
 enum class workspace_ev_change_t {
     INIT,
@@ -313,7 +313,7 @@ enum class workspace_ev_change_t {
     URGENT,
     RELOAD
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(workspace_ev_change_t, {
+DEFINE_ENUM(workspace_ev_change_t, {
         {workspace_ev_change_t::INIT, "init"},
         {workspace_ev_change_t::EMPTY, "empty"},
         {workspace_ev_change_t::FOCUS, "focus"},
@@ -347,7 +347,7 @@ enum class window_ev_change_t {
     URGENT,
     MARK
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(window_ev_change_t, {
+DEFINE_ENUM(window_ev_change_t, {
         {window_ev_change_t::NEW, "new"},
         {window_ev_change_t::CLOSE, "close"},
         {window_ev_change_t::FOCUS, "focus"},
@@ -372,7 +372,7 @@ using bar_config_update_ev_s = bar_config_s;
 enum class binding_ev_change_t {
     RUN
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(binding_ev_change_t, {
+DEFINE_ENUM(binding_ev_change_t, {
         {binding_ev_change_t::RUN, "run"},
 })
 
@@ -380,7 +380,7 @@ enum class binding_ev_input_type_t {
     KEYBOARD,
     MOUSE,
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(binding_ev_input_type_t, {
+DEFINE_ENUM(binding_ev_input_type_t, {
         {binding_ev_input_type_t::KEYBOARD, "keyboard"},
         {binding_ev_input_type_t::MOUSE, "mouse"},
 })
@@ -400,7 +400,7 @@ DEFINE_TYPE_DEFAULT(binding_ev_s, change, command, event_state_mask,
 enum class shutdown_ev_change_t {
     EXIT,
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(shutdown_ev_change_t, {
+DEFINE_ENUM(shutdown_ev_change_t, {
         {shutdown_ev_change_t::EXIT, "exit"},
 })
 
@@ -429,7 +429,7 @@ enum class input_ev_change_t {
     XKB_LAYOUT,
     LIBINPUT_CONFIG
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(input_ev_change_t, {
+DEFINE_ENUM(input_ev_change_t, {
         {input_ev_change_t::ADDED, "added"},
         {input_ev_change_t::REMOVED, "removed"},
         {input_ev_change_t::XKB_KEYMAP, "xkb_keymap"},
