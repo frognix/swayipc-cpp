@@ -16,3 +16,16 @@ swayipc_lib = static_library('swayipc-cpp',
                              override_options : ['cpp_std=c++17'])
 
 swayipc_dep = declare_dependency(link_with : swayipc_lib, include_directories : incdir)
+
+#build examples
+
+examples = [
+  'connecting',
+  'event_handling'
+]
+
+foreach example : examples
+  executable('example-' + example, './examples' / (example + '.cpp'),
+             dependencies: swayipc_dep,
+             build_by_default: false)
+endforeach
