@@ -7,8 +7,6 @@ namespace swayipc {
 sway_socket::sway_socket()
     : m_socket_path(std::getenv("SWAYSOCK")), m_socket(AF_UNIX, SOCK_STREAM, 0) {}
 
-sway_socket::~sway_socket() { close(); }
-
 bool sway_socket::connect(std::string socket_path) {
     m_socket_path = socket_path;
     struct sockaddr_un addr;
@@ -48,8 +46,8 @@ void sway_socket::send_to_event_queue(message_s&& msg) {
     m_queues[msg.header.type].push(msg);
 }
 
-connection sway_socket::get_client() {
-    return connection(this);
+client sway_socket::get_client() {
+    return client(this);
 }
 
 message_s sway_socket::request(message_type type, std::string payload) {

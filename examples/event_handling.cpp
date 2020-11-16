@@ -5,7 +5,7 @@ using swayipc::event_type_t,
     swayipc::data::window_ev_s,
     swayipc::data::window_ev_change_t;
 
-void event_handler(swayipc::connection conn, swayipc::event_stream<window_ev_s> stream) {
+void event_handler(swayipc::client conn, swayipc::event_stream<window_ev_s> stream) {
     while (true) {
         window_ev_s event = stream.get_event();
 
@@ -20,7 +20,7 @@ int main() {
     swayipc::sway_socket socket;
     socket.connect();
 
-    swayipc::connection conn = socket.get_client();
+    swayipc::client conn = socket.get_client();
 
     conn.subscribe(event_type_t::WINDOW);
     // you can subscribe to many events with | operator

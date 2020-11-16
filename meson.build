@@ -3,7 +3,7 @@ project('swayipc-cpp', 'cpp',
 
 incdir = include_directories('include')
 
-src = ['./src/connection.cpp', './src/socket_wrapper.cpp',
+src = ['./src/client.cpp', './src/socket_wrapper.cpp',
        './src/sway_socket.cpp', './src/container.cpp']
 
 json_dep = dependency('nlohmann_json')

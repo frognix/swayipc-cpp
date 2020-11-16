@@ -13,7 +13,7 @@ int main() {
     swayipc::sway_socket socket;
     socket.connect();
 
-    swayipc::connection conn = socket.get_client();
+    swayipc::client conn = socket.get_client();
 
     conn.command("exec notify-send \"example 1\"");
 }
@@ -28,7 +28,7 @@ using swayipc::event_type_t,
     swayipc::data::window_ev_s,
     swayipc::data::window_ev_change_t;
 
-void event_handler(swayipc::connection conn, swayipc::event_stream<window_ev_s> stream) {
+void event_handler(swayipc::client conn, swayipc::event_stream<window_ev_s> stream) {
     while (true) {
         window_ev_s event = stream.get_event();
 
@@ -43,14 +43,14 @@ int main() {
     swayipc::sway_socket socket;
     socket.connect();
 
-    swayipc::connection conn = socket.get_client();
+    swayipc::client conn = socket.get_client();
 
     conn.subscribe(event_type_t::WINDOW);
     // you can subscribe to many events with | operator
     // conn.subscribe(event_type_t::WINDOW | event_type_t::WORKSPACE);
 
     // connection and event_stream classes are threadsafe
-    // you can run event handler in a separate thread.
+    // you can run event handler in a separate thread
     std::thread thread(event_handler, conn,
                     socket.get_event_stream<window_ev_s>());
     thread.detach();

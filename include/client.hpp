@@ -43,10 +43,10 @@ inline bool operator & (event_type_t a, event_type_t b) {
 
 class sway_socket;
 
-class connection {
+class client {
 public:
-    connection(sway_socket*);
-    ~connection();
+    client(sway_socket*);
+    ~client();
     message_s raw_request(message_type type, std::string payload = "");
 
     std::vector<data::command_success_s> command(std::string command);

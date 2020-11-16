@@ -4,7 +4,7 @@
 #include <mutex>
 #include <thread>
 
-#include "connection.hpp"
+#include "client.hpp"
 #include "event_stream.hpp"
 
 namespace swayipc {
@@ -12,7 +12,6 @@ namespace swayipc {
 class sway_socket {
 public:
     sway_socket();
-    ~sway_socket();
 
     bool connect(std::string socket_path);
     bool connect();
@@ -23,7 +22,7 @@ public:
     template <class T>
     event_stream<T> get_event_stream();
 
-    connection get_client();
+    client get_client();
 
     message_s request(message_type type, std::string payload = "");
 
