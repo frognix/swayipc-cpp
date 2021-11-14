@@ -1,4 +1,4 @@
-#include "sway_socket.hpp"
+#include <swayipc-cpp/sway_socket.hpp>
 #include <iostream>
 
 using swayipc::event_type_t,
@@ -23,7 +23,7 @@ int main() {
     swayipc::client conn = socket.get_client();
 
     conn.subscribe(event_type_t::WINDOW);
-    // you can subscribe to many events with | operator
+    // you can subscribe to several events with | operator
     // conn.subscribe(event_type_t::WINDOW | event_type_t::WORKSPACE);
 
     // connection and event_stream classes are threadsafe

@@ -1,4 +1,4 @@
-#include "sway_socket.hpp"
+#include <swayipc-cpp/sway_socket.hpp>
 
 int main() {
     swayipc::sway_socket socket;

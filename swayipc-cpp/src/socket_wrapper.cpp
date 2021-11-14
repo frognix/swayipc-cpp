@@ -1,4 +1,4 @@
-#include "socket_wrapper.hpp"
+#include <swayipc-cpp/socket_wrapper.hpp>
 
 namespace swayipc {
 

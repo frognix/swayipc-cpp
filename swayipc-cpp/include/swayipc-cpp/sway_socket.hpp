@@ -4,8 +4,8 @@
 #include <mutex>
 #include <thread>
 
-#include "client.hpp"
-#include "event_stream.hpp"
+#include <swayipc-cpp/client.hpp>
+#include <swayipc-cpp/event_stream.hpp>
 
 namespace swayipc {
 
@@ -13,8 +13,8 @@ class sway_socket {
 public:
     sway_socket();
 
-    bool connect(std::string socket_path);
-    bool connect();
+    void connect(std::string socket_path);
+    void connect();
     void close();
 
     void handle_events();

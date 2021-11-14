@@ -1,9 +1,25 @@
-#include "client.hpp"
-#include "sway_socket.hpp"
+#include <swayipc-cpp/client.hpp>
+#include <swayipc-cpp/sway_socket.hpp>
+
+#include "json-macro.hpp"
 
 using namespace swayipc::data;
 
+using json = nlohmann::json;
+
 namespace swayipc {
+
+DEFINE_ENUM(event_type_t, {
+        {event_type_t::WORKSPACE,        "workspace"},
+        {event_type_t::MODE,             "mode"},
+        {event_type_t::WINDOW,           "window"},
+        {event_type_t::BARCONFIG_UPDATE, "barconfig_update"},
+        {event_type_t::BINDING,          "binding"},
+        {event_type_t::SHUTDOWN,         "shutdown"},
+        {event_type_t::TICK,             "tick"},
+        {event_type_t::BAR_STATE_UPDATE, "bar_state_update"},
+        {event_type_t::INPUT,            "input"},
+})
 
 client::client(sway_socket* socket)
     : m_socket(socket) {}

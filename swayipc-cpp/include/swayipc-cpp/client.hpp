@@ -3,10 +3,9 @@
 #include <functional>
 #include <type_traits>
 
-#include "socket_wrapper.hpp"
-#include "serialization.hpp"
-#include "assert.hpp"
-#include "message.hpp"
+#include <swayipc-cpp/socket_wrapper.hpp>
+#include <swayipc-cpp/data.hpp>
+#include <swayipc-cpp/message.hpp>
 
 namespace swayipc {
 
@@ -21,17 +20,7 @@ enum class event_type_t : int {
     BAR_STATE_UPDATE = 0b00000001000000,
     INPUT            = 0b00000000100000
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(event_type_t, {
-        {event_type_t::WORKSPACE,        "workspace"},
-        {event_type_t::MODE,             "mode"},
-        {event_type_t::WINDOW,           "window"},
-        {event_type_t::BARCONFIG_UPDATE, "barconfig_update"},
-        {event_type_t::BINDING,          "binding"},
-        {event_type_t::SHUTDOWN,         "shutdown"},
-        {event_type_t::TICK,             "tick"},
-        {event_type_t::BAR_STATE_UPDATE, "bar_state_update"},
-        {event_type_t::INPUT,            "input"},
-})
+JSON_TYPE_HEADER(event_type_t)
 
 inline event_type_t operator | (event_type_t a, event_type_t b) {
     return static_cast<event_type_t>(static_cast<int>(a) | static_cast<int>(b));

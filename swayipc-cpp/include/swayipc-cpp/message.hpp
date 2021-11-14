@@ -1,5 +1,11 @@
 #pragma once
 
+#include <cstdint>
+#include <string>
+#include <type_traits>
+
+#include <swayipc-cpp/data.hpp>
+
 namespace swayipc {
 
 enum message_type : uint32_t {
@@ -36,9 +42,22 @@ struct __attribute__ ((packed)) message_header {
     message_type type;
 };
 
+class socket_wrapper;
+
 struct message_s {
     message_header header;
     std::string payload;
+
+    static message_s create(message_type type, std::string payload) {
+        message_s result;
+        result.header.type = type;
+        result.header.length = payload.length();
+        result.payload = payload;
+        return result;
+    }
+    static void send(socket_wrapper&, const message_s&);
+    static message_s recv(socket_wrapper&);
+    static message_header peek_header(socket_wrapper&);
 };
 
 template <class T>

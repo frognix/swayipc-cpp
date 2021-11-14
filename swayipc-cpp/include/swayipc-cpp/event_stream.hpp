@@ -1,6 +1,8 @@
 #pragma once
 
-#include "safequeue.hpp"
+#include <swayipc-cpp/safequeue.hpp>
+#include <swayipc-cpp/json.hpp>
+#include <swayipc-cpp/message.hpp>
 
 namespace swayipc {
 
@@ -21,7 +23,7 @@ event_stream<T>::event_stream(safe_queue<message_s>* queue)
 template <class T>
 T event_stream<T>::get_event() {
     auto message = m_queue->pop();
-    return data::json::parse(message.payload).get<T>();
+    return ::nlohmann::json::parse(message.payload).get<T>();
 }
 
 template <class T>
