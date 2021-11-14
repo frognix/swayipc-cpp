@@ -4,9 +4,6 @@ project(swayipc-cpp)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
 
@@ -26,6 +23,8 @@ conan_cmake_configure(
     GENERATORS cmake_find_package
 )
 
+conan_cmake_autodetect(settings)
+
 conan_cmake_install(
     PATH_OR_REFERENCE .
     BUILD missing
@@ -35,8 +34,6 @@ conan_cmake_install(
 
 find_package(Threads REQUIRED)
 find_package(nlohmann_json REQUIRED)
-
-conan_cmake_autodetect(settings)
 
 add_subdirectory(swayipc-cpp)
 add_subdirectory(example)
