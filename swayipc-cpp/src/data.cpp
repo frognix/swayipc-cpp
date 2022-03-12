@@ -31,7 +31,7 @@ DEFINE_ENUM(transform_t, {
 DEFINE_STRICT_TYPE(mode_s, width, height, refresh)
 
 DEFINE_TYPE_DEFAULT(output_s, name, make, model, serial, active, dpms, primary, scale, subpixel_hinting,
-                    transform, current_workspace, modes, current_mode, rect)
+                    transform, current_workspace, modes, current_mode, rect, focused)
 
 DEFINE_ENUM(bar_mode_t, {
         {bar_mode_t::DOCK, "dock"},

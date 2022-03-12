@@ -13,6 +13,6 @@ foreach(file ${source_files})
     target_link_libraries(
         ${example}
         PRIVATE
-        swayipc_cpp_static
+        swayipc_cpp
     )
 endforeach()

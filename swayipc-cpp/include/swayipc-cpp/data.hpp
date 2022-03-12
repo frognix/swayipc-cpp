@@ -63,6 +63,7 @@ struct output_s {
     std::optional<std::vector<mode_s>> modes;
     std::optional<mode_s> current_mode;
     std::optional<rect_s> rect;
+    std::optional<bool> focused;
 };
 JSON_TYPE_HEADER(output_s)
 
