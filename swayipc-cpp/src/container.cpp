@@ -98,6 +98,7 @@ DEFINE_TYPE_DEFAULT(container, id, name, type, border, current_border_width,
                     deco_rect, geometry, urgent, sticky, marks,
                     focused, focus, nodes, floating_nodes, representation,
                     fullscreen_mode, app_id, pid, visible, shell,
-                    inhibit_idle, idle_inhibitors, window, window_properties)
+                    inhibit_idle, idle_inhibitors, window, window_properties,
+                    current_workspace)
 
 } // namespace swayipc::data

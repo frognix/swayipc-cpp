@@ -112,6 +112,7 @@ struct container {
     std::optional<idle_inhibitors_s> idle_inhibitors;
     std::optional<int> window;
     std::optional<window_properties_s> window_properties;
+    std::optional<std::string> current_workspace;
 
     container* find(std::function<bool(const container&)>);
     std::vector<container*> find_many(std::function<bool(const container&)>);
