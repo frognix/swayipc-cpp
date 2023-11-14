@@ -2,6 +2,16 @@
 
 A simple C++17 library for controlling sway window manager.
 
+# Installing
+
+A `PKGBUILD` is attached in this repository:
+
+```sh
+mkdir build && cd build
+curl -o PKGBUILD https://raw.githubusercontent.com/aokellermann/swayipc-cpp/master/PKGBUILD
+yay -Bi .
+```
+
 # Examples
 
 ## Connecting
